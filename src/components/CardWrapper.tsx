@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -19,6 +17,7 @@ interface CardWrapperProps {
   description?: string;
   BackButtonTitle?: string;
   BackButtonHref?: string;
+  showSocial?: boolean;
 }
 
 export function CardWrapper({
@@ -26,9 +25,10 @@ export function CardWrapper({
   description,
   BackButtonTitle,
   BackButtonHref,
+  showSocial,
 }: CardWrapperProps) {
   return (
-    <Card className="w-[350px] py-2 px-6">
+    <Card className="w-[400px] py-2 px-2">
       <CardHeader>
         <CardTitle className="text-center text-2xl text-green-500 flex justify-center items-center gap-2">
           Auth Active <Shield className="h-6 w-6" />
@@ -39,13 +39,19 @@ export function CardWrapper({
       </CardHeader>
       <CardContent>
         {children}
-        <SocialIcons />
+        {showSocial && <SocialIcons />}
       </CardContent>
-      <CardFooter className="flex justify-between bg-red-500">
-        <Button variant={"link"} className="text-white">
-          <Link href={BackButtonHref as string}>{BackButtonTitle}</Link>
-        </Button>
-      </CardFooter>
+      {BackButtonHref && (
+        <CardFooter className="flex justify-center ">
+          <Button
+            variant={"link"}
+            asChild
+            className="text-sm text-slate-500 dark:text-slate-300/65 "
+          >
+            <Link href={BackButtonHref as string}>{BackButtonTitle}</Link>
+          </Button>
+        </CardFooter>
+      )}
     </Card>
   );
 }
