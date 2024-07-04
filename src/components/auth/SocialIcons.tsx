@@ -8,8 +8,6 @@ import { redirectAfterAuthRoute } from "../../../routes";
 
 function SocialIcons() {
   const AuthenticationByProviders = async (provider: "google" | "github") => {
-    console.log(provider);
-
     await signIn(provider, {
       callbackUrl: redirectAfterAuthRoute,
     });

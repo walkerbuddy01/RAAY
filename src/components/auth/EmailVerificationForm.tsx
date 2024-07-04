@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { CardWrapper } from "../CardWrapper";
+import { AuthCardWrapper } from "../AuthCardWrapper";
 import { useCallback, useEffect, useState, useTransition } from "react";
 import { verifyingUser } from "@/actions/verifyingUser";
 import { BeatLoader } from "react-spinners";
@@ -38,7 +38,7 @@ function EmailVerificationForm() {
   }, [verifyingToken]);
 
   return (
-    <CardWrapper
+    <AuthCardWrapper
       description="Email Verification"
       BackButtonHref="/auth/sign-in"
       BackButtonTitle="Back to signIn"
@@ -46,7 +46,7 @@ function EmailVerificationForm() {
       {pending && <BeatLoader color={"#7b7b7b"} className="text-center" />}
       <SuccessMessage message={success} />
       <ErrorMessage message={error} />
-    </CardWrapper>
+    </AuthCardWrapper>
   );
 }
 

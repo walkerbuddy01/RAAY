@@ -25,7 +25,7 @@ export const sendEmailVerificationToken = async (
 };
 
 export const sendForgotPasswordEmail = async (email: string, token: string) => {
-  const forgotPasswordLink = `${process.env.WEBSITE_DOMAIN}/auth/forgot-password?token=${token}&email=${email}`;
+  const forgotPasswordLink = `${process.env.WEBSITE_DOMAIN}/auth/reset-password?token=${token}&email=${email}`;
 
   const mailOptions = {
     from: process.env.NODEMAILER_USER,
@@ -37,8 +37,11 @@ export const sendForgotPasswordEmail = async (email: string, token: string) => {
 
   try {
     const sendInfo = await transporter.sendMail(mailOptions);
+
     return sendInfo;
   } catch (error) {
+    console.log(error);
+
     return null;
   }
 };

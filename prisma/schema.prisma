@@ -11,12 +11,13 @@ model User {
   id            String    @id @default(cuid())
   name          String?
   email         String    @unique
-  emailVerified Boolean?   @default(false)
+  emailVerified Boolean?  @default(false)
   image         String?
   password      String?
   accounts      Account[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+  Feeder        Feeder[]
 }
 
 model Account {
@@ -56,4 +57,28 @@ model ForgetPasswordToken {
   expire DateTime
 
   @@unique([token, email])
+}
+
+model Feeder {
+  id             String   @id @unique @default(cuid())
+  label          String
+  context        String
+  imageUrl       String?  @db.Text
+  userId         String
+  takingFeedback Boolean? @default(false)
+  inviteCode     String   @db.Text
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Feedback  Feedback[]
+
+  @@index([userId])
+}
+
+model Feedback {
+  id       String @id @unique @default(cuid())
+  message  String
+  feederId String
+  feeder   Feeder @relation(fields: [feederId], references: [id], onDelete: Cascade)
 }

@@ -24,6 +24,7 @@ export default {
         }
         const { email, password } = validateData.data;
         const existingUser = await getUserByEmail(email as string);
+
         if (!existingUser) {
           return null;
         }
@@ -32,6 +33,7 @@ export default {
           password,
           existingUser.password as string
         );
+
         if (!isPasswordCorrect) return null;
         return existingUser;
       },

@@ -20,7 +20,7 @@ interface CardWrapperProps {
   showSocial?: boolean;
 }
 
-export function CardWrapper({
+export function AuthCardWrapper({
   children,
   description,
   BackButtonTitle,

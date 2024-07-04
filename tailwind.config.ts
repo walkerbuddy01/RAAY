@@ -2,6 +2,13 @@ import type { Config } from "tailwindcss";
 // import defaultTheme from "tailwindcss/defaultTheme";
 // import colors from "tailwindcss/colors";
 import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette";
+// import { withUt } from "uploadthing/tw";
+
+// export const withUt({
+//   // Your existing Tailwind config
+//   content: ["./src/**/*.{ts,tsx,mdx}"],
+//   ...
+// });
 
 const config = {
   darkMode: ["class"],

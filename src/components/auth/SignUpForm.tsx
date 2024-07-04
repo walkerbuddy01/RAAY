@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { signUpZodSchema } from "@/zodSchema";
 import * as z from "zod";
 
-import { CardWrapper } from "@/components/CardWrapper";
+import { AuthCardWrapper } from "@/components/AuthCardWrapper";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -59,7 +59,7 @@ function SignUpForm() {
     });
   };
   return (
-    <CardWrapper
+    <AuthCardWrapper
       description="Create new account"
       BackButtonHref="/auth/sign-in"
       BackButtonTitle="Already have account!"
@@ -164,7 +164,7 @@ function SignUpForm() {
           </div>
         </form>
       </Form>
-    </CardWrapper>
+    </AuthCardWrapper>
   );
 }
 

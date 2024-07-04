@@ -4,8 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { signInZodSchema, signUpZodSchema } from "@/zodSchema";
 import * as z from "zod";
+import { AuthCardWrapper } from "@/components/AuthCardWrapper";
 
-import { CardWrapper } from "@/components/CardWrapper";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -47,9 +47,6 @@ function SignInForm() {
     startTransition(() => {
       signIn(values)
         .then((data) => {
-          if (!data) {
-            return setError("Something went wrong");
-          }
           setError(data?.error);
           setSuccess(data?.success);
         })
@@ -59,7 +56,7 @@ function SignInForm() {
     });
   };
   return (
-    <CardWrapper
+    <AuthCardWrapper
       description="Welcome Back"
       BackButtonHref="/auth/sign-up"
       BackButtonTitle="Not have ? Create new!"
@@ -125,7 +122,7 @@ function SignInForm() {
             )}
           />
           <div className="w-full text-sm py-1 px-1 select-none">
-            <Link href={""}> Forgot password?</Link>
+            <Link href={"/auth/forgot-password"}> Forgot password?</Link>
           </div>
           <SuccessMessage message={success} />
           <ErrorMessage message={error} />
@@ -137,7 +134,7 @@ function SignInForm() {
           </div>
         </form>
       </Form>
-    </CardWrapper>
+    </AuthCardWrapper>
   );
 }
 

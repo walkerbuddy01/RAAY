@@ -36,18 +36,16 @@ export const signIn = async (values: z.infer<typeof signInZodSchema>) => {
     await authSignIn("credentials", {
       email,
       password,
-      redirectTo: `${redirectAfterAuthRoute}`,
+      redirectTo: redirectAfterAuthRoute,
     });
     return { success: "Sign In Done" };
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
     if (error instanceof AuthError) {
       switch (error.type) {
         case "CredentialsSignin":
           return { error: "Wrong Credentials!" };
-        default: {
-          return { error: "Something went Wrong!" };
-        }
+        default:
+          return { error: "Something went wrong!" };
       }
     }
 

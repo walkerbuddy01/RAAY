@@ -5,7 +5,7 @@
  *
  * @type {String[]}
  */
-export const publicRoutes: string[] = ["/"];
+export const publicRoutes: string[] = ["/", "/api/uploadthing"];
 
 /**
  * Auth routes for performing authentication
@@ -25,7 +25,11 @@ export const authRoutes: string[] = [
  * @type {String[]}
  */
 
-export const protectedRoutes: string[] = ["/d"];
+export const protectedRoutes: string[] = [
+  "/d/feeder",
+  "/d/setting",
+  "/create-feeder",
+];
 
 /**
  * Redirect After Auth routes
@@ -34,7 +38,7 @@ export const protectedRoutes: string[] = ["/d"];
  * @type {String}
  */
 
-export const redirectAfterAuthRoute: string = "/d";
+export const redirectAfterAuthRoute: string = "/d/feeder";
 
 /**
  * The prefix for authentication routes
