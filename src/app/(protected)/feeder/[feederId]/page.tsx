@@ -1,10 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getFeederById } from "@/data/feeder";
 import { cn } from "@/lib/utils";
-import { Copy, Image } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Image } from "lucide-react";
 import { FeederSetting } from "@/components/feeder/feederSetting";
+import { currentUser } from "@/lib/currentUser";
 
 interface FeederProps {
   params: {
@@ -13,6 +12,7 @@ interface FeederProps {
 }
 
 async function Feeder({ params }: FeederProps) {
+  const user = await currentUser();
   const existingFeeder = await getFeederById(params.feederId);
   const shareableLink = `${process.env.WEBSITE_DOMAIN}/anonymousfeedback/${existingFeeder?.inviteCode}`;
 
@@ -47,7 +47,12 @@ async function Feeder({ params }: FeederProps) {
           </p>
         </CardContent>
       </Card>
-      <FeederSetting shareableLink={shareableLink} />
+      <FeederSetting
+        userId={user?.id as string}
+        id={existingFeeder?.id as string}
+        shareableLink={shareableLink}
+        takingFeedback={existingFeeder?.takingFeedback as boolean}
+      />
     </div>
   );
 }

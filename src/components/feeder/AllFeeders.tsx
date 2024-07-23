@@ -29,9 +29,8 @@ async function AllFeeders() {
               id={feeder.id}
               label={feeder.label}
               content={feeder.context}
-            >
-              hello
-            </FeederCardWrapper>
+              takingFeedback={feeder.takingFeedback as boolean}
+            />
           ))}
         </div>
         <ScrollBar orientation="horizontal" />

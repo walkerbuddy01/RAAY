@@ -66,13 +66,14 @@ model Feeder {
   imageUrl       String?  @db.Text
   userId         String
   takingFeedback Boolean? @default(false)
-  inviteCode     String   @db.Text
+  inviteCode     String   @db.Text @unique
   user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   Feedback  Feedback[]
 
+  @@unique([id, userId])
   @@index([userId])
 }
 

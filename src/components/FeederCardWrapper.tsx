@@ -2,13 +2,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Disc3, Image as FeederImage } from "lucide-react";
 
 import Link from "next/link";
+import { ActionToolTip } from "./ActionTooltip";
+
+import { Badge } from "./ui/badge";
+import { cn } from "@/lib/utils";
 
 interface FeederCardWrapperProps {
   id: string;
   label: string;
   content: string;
   imageUrl?: string;
-  children: React.ReactNode;
+  takingFeedback: boolean;
 }
 
 export function FeederCardWrapper({
@@ -16,6 +20,7 @@ export function FeederCardWrapper({
   label,
   content,
   imageUrl,
+  takingFeedback,
 }: FeederCardWrapperProps) {
   return (
     <Link href={`/feeder/${id}`}>
@@ -23,6 +28,17 @@ export function FeederCardWrapper({
         <CardHeader>
           <CardTitle className="text-center text-xl text-sky-500 flex justify-center items-center gap-2 border-b pb-1">
             Feeder <Disc3 className="h-5 w-5 animate-spin" />
+            <ActionToolTip label="Status of working">
+              <Badge className="bg-black rounded-full">
+                <p
+                  className={cn(
+                    takingFeedback ? "text-emerald-500" : "text-rose-500"
+                  )}
+                >
+                  {takingFeedback ? "Active" : "InActive"}
+                </p>
+              </Badge>
+            </ActionToolTip>
           </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-1">

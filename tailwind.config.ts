@@ -33,6 +33,7 @@ const config = {
           spotlight: "spotlight 2s ease .75s 1 forwards",
         },
         keyframes: {
+          
           spotlight: {
             "0%": {
               opacity: "0",
