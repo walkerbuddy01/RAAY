@@ -43,3 +43,9 @@ export const createFeederZodSchema = z.object({
   //TODO: create the validation for image
   takingFeedback: z.boolean(),
 });
+
+export const feederFeedback = z.object({
+  message: z.string().min(6, {
+    message: "Too short feedback",
+  }),
+});

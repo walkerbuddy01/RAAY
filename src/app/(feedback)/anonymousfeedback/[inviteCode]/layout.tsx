@@ -24,6 +24,10 @@ export default async function FeedbackLayout({
       <BackgroundBeams />
     </div>
   ) : (
-    <div className=" w-full bg-slate-200 dark:bg-zinc-900 ">{children}</div>
+    <>
+      <div className=" w-full h-screen bg-slate-200 dark:bg-zinc-900 ">
+        {children}
+      </div>
+    </>
   );
 }
