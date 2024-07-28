@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getFeederById } from "@/data/feeder";
 import { cn } from "@/lib/utils";
-import { Image } from "lucide-react";
+import { Image as ImageIcon } from "lucide-react";
 import { FeederSetting } from "@/components/feeder/feederSetting";
 import { currentUser } from "@/lib/currentUser";
 
@@ -25,7 +25,7 @@ async function Feeder({ params }: FeederProps) {
         <CardContent className="h-full w-full">
           {existingFeeder?.imageUrl && (
             <div className="h-[30%] w-full bg-zinc-400 dark:bg-zinc-800 animate-pulse rounded-lg flex justify-center items-center gap-1 mb-4">
-              <Image className="h-7 w-7 text-zinc-500" />
+              <ImageIcon className="h-7 w-7 text-zinc-500" />
               <p className="text-zinc-500 font-bold">No Image</p>
             </div>
           )}

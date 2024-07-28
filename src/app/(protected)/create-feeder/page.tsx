@@ -110,8 +110,8 @@ function CreateFeeder() {
                 <div className="space-y-0.5">
                   <FormLabel>Want to get feedback</FormLabel>
                   <FormDescription>
-                    When you share your feed links in known groups, you'll
-                    receive feedback.
+                    When you share your feed links in known groups, you&apos;ll
+                    receive feedback
                   </FormDescription>
                 </div>
                 <FormControl>

@@ -32,35 +32,37 @@ function ResetPasswordForm() {
   const token = searchParam.get("token");
   const email = searchParam.get("email");
   const [pending, startTransition] = useTransition();
-  const [seePassword, setSeePassword] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
-  if (!token) {
-    setError("Token not found!");
-    return;
-  }
-
-  if (!email) {
-    setError("email not found!");
-    return;
-  }
-
-  const checkTokenExpireTime = async () => {
-    const existingToken = await getForgotPasswordTokenByToken(token);
-    if (!existingToken) {
-      return setError("Token does not exist!");
-    }
-    const hasExpired = new Date(existingToken.expire) < new Date();
-    if (hasExpired) {
-      return setError("Token has Expired!");
-    }
-  };
 
   useEffect(() => {
+    if (!token) {
+      setError("Token not found!");
+      return;
+    }
+
+    if (!email) {
+      setError("email not found!");
+      return;
+    }
+    const checkTokenExpireTime = async () => {
+      const existingToken = await getForgotPasswordTokenByToken(token);
+      if (!existingToken) {
+        setError("Token does not exist!");
+        return;
+      }
+      const hasExpired = new Date(existingToken.expire) < new Date();
+      if (hasExpired) {
+        setError("Token has Expired!");
+        return;
+      }
+    };
+
     setError("");
     setSuccess("");
     checkTokenExpireTime();
-  }, []);
+  }, [token, email]);
 
   const form = useForm<z.infer<typeof resetPasswordZodSchema>>({
     resolver: zodResolver(resetPasswordZodSchema),
@@ -79,6 +81,7 @@ function ResetPasswordForm() {
     }
 
     startTransition(() => {
+      // @ts-ignore
       resetPassword(email, token, value.password)
         .then((data) => {
           if (!data) {
@@ -112,21 +115,21 @@ function ResetPasswordForm() {
                 <FormControl>
                   <div className="relative">
                     <Input
-                      placeholder={seePassword ? "123456" : "******"}
+                      placeholder={showPassword ? "123456" : "******"}
                       {...field}
                       className="placeholder:text-base placeholder:text-slate-300/50"
-                      type={seePassword ? "text" : "password"}
+                      type={showPassword ? "text" : "password"}
                       disabled={pending}
                     />
                     <div className="absolute top-2 right-3 select-none cursor-pointer">
-                      {seePassword ? (
+                      {showPassword ? (
                         <Eye
                           className="h-5 w-5"
-                          onClick={() => setSeePassword(false)}
+                          onClick={() => setShowPassword(false)}
                         />
                       ) : (
                         <EyeOff
-                          onClick={() => setSeePassword(true)}
+                          onClick={() => setShowPassword(true)}
                           className="h-5 w-5"
                         />
                       )}

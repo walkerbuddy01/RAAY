@@ -1,7 +1,7 @@
 import FeedbackTextarea from "@/components/feeder/FeedbackTextarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getFeederByInviteCode } from "@/data/feeder";
-import { Disc3, Image } from "lucide-react";
+import { Disc3, Image as ImageIcon } from "lucide-react";
 
 interface AnonymousFeedbackProps {
   params: {
@@ -29,7 +29,7 @@ export default async function AnonymousFeedback({
               <CardContent className="flex flex-col gap-1 p-4">
                 {existingFeeder?.imageUrl && (
                   <div className="h-14 w-14 bg-zinc-800 animate-pulse rounded-lg flex justify-center items-center">
-                    <Image className="h-6 w-6" />
+                    <ImageIcon className="h-6 w-6"  />
                   </div>
                 )}
                 <p className="text-left text-base font-bold underline text-orange-500">

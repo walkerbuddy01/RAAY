@@ -26,6 +26,7 @@ async function AllFeeders() {
         <div className=" flex  w-full gap-3  p-2">
           {feeders?.map((feeder) => (
             <FeederCardWrapper
+              key={feeder.id}
               id={feeder.id}
               label={feeder.label}
               content={feeder.context}
