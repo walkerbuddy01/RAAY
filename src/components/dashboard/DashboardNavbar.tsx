@@ -1,11 +1,23 @@
 "use client";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
 import ActionAvatar from "../ActionAvatar";
 import { ShowHoverDetails } from "../ShowHoverDetails";
 import { ThemeToggler } from "../ThemeToggler";
 import { Button } from "../ui/button";
 import { signOut } from "next-auth/react";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { AlignRight } from "lucide-react";
+import Link from "next/link";
+
 function DashboardNavbar() {
   const user = useCurrentUser();
   const signOutCurrent = async () => {
@@ -38,10 +50,54 @@ function DashboardNavbar() {
         </ShowHoverDetails>
       </div>
 
-      <div className="h-full hidden  sm:flex items-center gap-3">
+      <div className="h-full hidden sm:flex items-center gap-3">
         <Button variant={"destructive"} onClick={signOutCurrent}>
           Sign Out
         </Button>
+        <ThemeToggler />
+      </div>
+      <div className="h-full flex sm:hidden items-center gap-3">
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Button
+              variant={"default"}
+              size={"icon"}
+              className="bg-[#2B2D31] text-white p-1"
+            >
+              <AlignRight />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>
+              <div className="flex items-center gap-3">
+                {user?.name}
+                <ActionAvatar
+                  src={user?.image as string}
+                  name={user?.name as string}
+                  classname="h-8 w-8"
+                />
+              </div>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <Link href={"/d/feeder"}>Feeder</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              {" "}
+              <Link href={"/d/setting"}>Setting</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Button
+                variant={"destructive"}
+                onClick={signOutCurrent}
+                className="w-full"
+              >
+                Sign Out
+              </Button>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
         <ThemeToggler />
       </div>
     </nav>
