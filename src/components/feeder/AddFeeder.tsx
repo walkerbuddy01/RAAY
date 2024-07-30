@@ -1,10 +1,10 @@
 "use client";
 import { Plus } from "lucide-react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Button } from "../ui/button";
 
+
 function AddFeeder() {
-  const router = useRouter();
   return (
     <div className="h-48 w-full">
       <div className="h-full w-56 bg-zinc-800 rounded-lg p-3  space-y-2">
@@ -14,10 +14,10 @@ function AddFeeder() {
         </div>
 
         <Button
-          onClick={() => router.push("/create-feeder")}
           className="w-full bg-blue-600 text-white hover:bg-blue-700"
+          asChild
         >
-          Add
+          <Link href={"/create-feeder"}>Add</Link>
         </Button>
       </div>
     </div>
