@@ -18,6 +18,8 @@ import { getFeedbacksByFeederId } from "@/data/feedback";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
 import { deleteFeedback } from "@/actions/deleteFeedback";
+import { Skeleton } from "@/components/ui/skeleton";
+import FeedbackSkeleton from "@/components/skeletons/FeedbackSkeleton";
 
 type Feedback = {
   id: string;
@@ -28,15 +30,6 @@ type Feedback = {
 export default function FeederFeedbacks() {
   const params = useParams();
   const router = useRouter();
-
-  // const [pending, startTransition] = useTransition();
-  // const handleDelete = async () => {
-  //   startTransition(() => {
-  //     deleteFeedback({ feederId, feedbackId }).then((data) => {
-  //       console.log(data);
-  //     });
-  //   });
-  // };
 
   const { data, fetchStatus, refetch } = useQuery({
     queryKey: ["feedbacks"],
@@ -54,14 +47,14 @@ export default function FeederFeedbacks() {
     mutationFn: deleteFeedback,
     onSuccess: () => {
       toast.success("Feedback Deleted ⚡", {
-        position: "top-right",
-        autoClose: 5000,
+        position: "top-center",
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: "dark",
       });
       refetch();
     },
@@ -84,7 +77,16 @@ export default function FeederFeedbacks() {
     <div className="h-full w-full bg-[#2B2D31] p-4 rounded-r-lg overflow-hidden ">
       <h1 className="text-2xl font-bold text-emerald-500">Feedbacks</h1>
       {fetchStatus !== "idle" ? (
-        <h1>Loading</h1>
+        <div className="h-full w-full overflow-auto space-y-4 py-4">
+          <FeedbackSkeleton />
+          <FeedbackSkeleton />
+          <FeedbackSkeleton />
+          <FeedbackSkeleton />
+          <FeedbackSkeleton />
+          <FeedbackSkeleton />
+          <FeedbackSkeleton />
+          <FeedbackSkeleton />
+        </div>
       ) : (
         <div className="h-full w-full overflow-auto space-y-2  py-4">
           {data?.map((feedback) => (

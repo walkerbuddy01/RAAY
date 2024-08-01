@@ -25,7 +25,7 @@ function DashboardNavbar() {
   };
 
   return (
-    <nav className="w-full h-[12%] px-5 py-4 flex items-center justify-between ">
+    <nav className="w-full h-[10%] sm:h-[12%] px-3 py-3 sm:px-5 sm:py-4 flex items-center justify-between ">
       <div className="h-full flex justify-center items-center  bg-slate-500/40 dark:bg-slate-500/30 border border-gray-500/40 rounded-full ">
         <ShowHoverDetails
           title="@RAAY"

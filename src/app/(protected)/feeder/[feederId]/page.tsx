@@ -17,7 +17,7 @@ async function Feeder({ params }: FeederProps) {
   const shareableLink = `${process.env.WEBSITE_DOMAIN}/anonymousfeedback/${existingFeeder?.inviteCode}`;
 
   return (
-    <div className="h-full w-full bg-zinc-800 rounded-r-lg p-4 flex flex-col sm:flex-row gap-4 justify-center">
+    <div className="h-full w-full bg-zinc-800 rounded-lg p-4 flex flex-col sm:flex-row gap-4 justify-center">
       <Card className="sm:w-[380px] h-3/5 sm:h-full ">
         <CardHeader>
           <CardTitle className="text-xl border-b px-1 py-1">Feeder</CardTitle>

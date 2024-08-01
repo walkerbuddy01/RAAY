@@ -6,7 +6,7 @@ export default async function Settings() {
   const feedersByCurrentUser = await getFeedersByUserId(user?.id as string);
 
   return (
-    <div className="h-full w-full bg-[#2B2D31] p-4 rounded-r-lg ">
+    <div className="h-full w-full bg-[#2B2D31] p-4 rounded-lg ">
       <div className="flex gap-1 flex-col h-full w-full p-3 rounded-xl bg-[#313338] ">
         <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
           <p className=" font-medium">ID</p>
