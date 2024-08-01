@@ -80,11 +80,15 @@ function DashboardNavbar() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Link href={"/d/feeder"}>Feeder</Link>
+              <Link href={"/d/feeder"}>Feeders</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               {" "}
-              <Link href={"/d/setting"}>Setting</Link>
+              <Link href={"/d/setting"}>Settings</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              {" "}
+              <Link href={"/d/feedbacks"}>Feedbacks</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Button

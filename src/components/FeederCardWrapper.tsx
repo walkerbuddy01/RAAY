@@ -13,6 +13,7 @@ interface FeederCardWrapperProps {
   content: string;
   imageUrl?: string;
   takingFeedback: boolean;
+  type: "feeder" | "feedback";
 }
 
 export function FeederCardWrapper({
@@ -21,10 +22,11 @@ export function FeederCardWrapper({
   content,
   imageUrl,
   takingFeedback,
+  type,
 }: FeederCardWrapperProps) {
   return (
-    <Link href={`/feeder/${id}`}>
-      <Card className="sm:w-[250px] w-[220px] h-full cursor-pointer ">
+    <Link href={type === "feeder" ? `/feeder/${id}` : `/d/feedbacks/${id}`}>
+      <Card className="sm:w-[250px] w-[220px] h-full cursor-pointer bg-gray-500 ">
         <CardHeader>
           <CardTitle className="text-center text-xl text-sky-500 flex justify-center items-center gap-2 border-b pb-1">
             Feeder <Disc3 className="h-5 w-5 animate-spin" />
@@ -50,11 +52,14 @@ export function FeederCardWrapper({
           <p className="text-left text-base font-bold underline text-orange-500">
             Label
           </p>
-          <p className="text-left text-wrap">{label}</p>
+          <p className="text-left text-wrap text-white">
+            {label.slice(0, 20)}
+            {label.length > 19 ? "..." : ""}
+          </p>
           <p className="text-left text-base font-bold underline text-orange-500">
             Context
           </p>
-          <p className="text-left text-sm h-10 w-full  text-balance overflow-hidden ">
+          <p className="text-left text-sm h-10 w-full text-white  text-balance overflow-hidden ">
             {content}
           </p>
         </CardContent>

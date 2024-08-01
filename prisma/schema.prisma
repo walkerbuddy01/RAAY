@@ -68,10 +68,10 @@ model Feeder {
   takingFeedback Boolean? @default(false)
   inviteCode     String   @db.Text @unique
   user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Feedback  Feedback[]
 
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
-  Feedback  Feedback[]
 
   @@unique([id, userId])
   @@index([userId])

@@ -31,6 +31,7 @@ async function AllFeeders() {
               label={feeder.label}
               content={feeder.context}
               takingFeedback={feeder.takingFeedback as boolean}
+              type="feeder"
             />
           ))}
         </div>

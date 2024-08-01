@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Cog, FolderOpen } from "lucide-react";
+import { Cog, FolderOpen, MessageSquareMore } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -61,6 +61,28 @@ export function NavigationSideBar() {
           >
             <Cog className="h-6 w-6" />
             Settings
+          </p>
+        </Button>
+      </Link>
+
+      <Link href={"/d/feedbacks"}>
+        <Button
+          onClick={() => {
+            setPathname("feedbacks");
+          }}
+          className={cn(
+            " w-full px-2 py-6  bg-transparent shadow-none  text-left group hover:bg-zinc-200",
+            pathname === "feedbacks" && "bg-zinc-200"
+          )}
+        >
+          <p
+            className={cn(
+              " text-[18px] font-semibold flex  items-center gap-2 text-left text-zinc-600  w-full group-hover:text-blue-500",
+              pathname === "feedbacks" && "text-blue-500"
+            )}
+          >
+            <MessageSquareMore className="h-6 w-6" />
+            Feedbacks
           </p>
         </Button>
       </Link>

@@ -1,10 +1,13 @@
+
+import { auth } from "@/auth";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
+import { SessionProvider } from "next-auth/react";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
-import { cn } from "@/lib/utils";
-import { ThemeProvider } from "@/components/ThemeProvider";
-import { SessionProvider } from "next-auth/react";
-import { auth } from "@/auth";
+import TanstackProvider from "@/providers/TanstackProvider";
+
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -29,16 +32,19 @@ export default async function RootLayout({
           fontSans.variable
         )}
       >
-        <SessionProvider session={session}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-        </SessionProvider>
+          <SessionProvider session={session}>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <TanstackProvider>
+
+              {children}
+              </TanstackProvider>
+            </ThemeProvider>
+          </SessionProvider>
       </body>
     </html>
   );
