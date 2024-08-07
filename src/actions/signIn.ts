@@ -37,7 +37,7 @@ export const signIn = async (values: z.infer<typeof signInZodSchema>) => {
       email,
       password,
       redirectTo: redirectAfterAuthRoute,
-    });
+    }); 
     return { success: "Sign In Done" };
   } catch (error: any) {
     if (error instanceof AuthError) {

@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 export function NavigationSideBar() {
+  
   const location = window.location.pathname.split("/");
   const exactLocation = location.filter((path) => path !== "");
 

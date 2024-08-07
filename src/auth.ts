@@ -6,13 +6,7 @@ import { getUserById } from "./data/user";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
-    async redirect({ url, baseUrl }) {
-      // In production, baseUrl will be the production URL
-      if (url.startsWith(baseUrl)) {
-        return url;
-      }
-      return baseUrl;
-    },
+  
 
     async signIn({ user, account }) {
       const existingUser = await getUserById(user.id as string);

@@ -81,7 +81,7 @@ export default function Home() {
 
   return (
     <main
-      className="h-full w-full bg-gray-300 bg-[radial-gradient(#e5e7eb_2px,transparent_2px)] [background-size:20px_20px]
+      className="h-screen  w-full bg-gray-300 bg-[radial-gradient(#e5e7eb_2px,transparent_2px)] [background-size:20px_20px]
        dark:bg-[#000000] dark:bg-[radial-gradient(#ffffff33_1.5px,#00091d_1px)] dark:bg-[size:20px_20px] relative antialiased overflow-hidden"
     >
       <Spotlight

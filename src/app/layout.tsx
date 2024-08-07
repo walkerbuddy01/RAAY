@@ -1,4 +1,3 @@
-
 import { auth } from "@/auth";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { cn } from "@/lib/utils";
@@ -7,6 +6,7 @@ import { SessionProvider } from "next-auth/react";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import TanstackProvider from "@/providers/TanstackProvider";
+import { currentUser } from "@/lib/currentUser";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -28,23 +28,24 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "relative h-full bg-background font-sans antialiased",
           fontSans.variable
         )}
       >
-          <SessionProvider session={session}>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <TanstackProvider>
-
-              {children}
-              </TanstackProvider>
-            </ThemeProvider>
-          </SessionProvider>
+        <SessionProvider session={session}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <TanstackProvider>
+              <main className="flex flex-col relative min-h-screen ">
+                <div className="flex-grow flex-1">{children}</div>
+              </main>
+            </TanstackProvider>
+          </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );

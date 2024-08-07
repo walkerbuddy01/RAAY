@@ -15,6 +15,7 @@ export interface feederType {
 }
 
 async function AllFeeders() {
+
   const user = await currentUser();
   const feeders = await getFeedersByUserId(user?.id as string);
   return (

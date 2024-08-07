@@ -24,6 +24,7 @@ export function FeederCardWrapper({
   takingFeedback,
   type,
 }: FeederCardWrapperProps) {
+
   return (
     <Link href={type === "feeder" ? `/feeder/${id}` : `/d/feedbacks/${id}`}>
       <Card className="sm:w-[250px] w-[220px] h-full cursor-pointer bg-gray-500 ">
