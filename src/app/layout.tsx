@@ -1,12 +1,13 @@
-import { auth } from "@/auth";
-import { ThemeProvider } from "@/components/ThemeProvider";
 import { cn } from "@/lib/utils";
-import type { Metadata } from "next";
+
+import TanstackProvider from "@/providers/TanstackProvider";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 import { SessionProvider } from "next-auth/react";
+import { auth } from "@/auth";
+
+import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
-import TanstackProvider from "@/providers/TanstackProvider";
-import { currentUser } from "@/lib/currentUser";
 
 const fontSans = FontSans({
   subsets: ["latin"],

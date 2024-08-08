@@ -1,8 +1,8 @@
 "use client";
 import { Plus } from "lucide-react";
 import Link from "next/link";
-import { Button } from "../ui/button";
-
+import { Button, buttonVariants } from "../ui/button";
+import { cn } from "@/lib/utils";
 
 function AddFeeder() {
   return (
@@ -13,12 +13,15 @@ function AddFeeder() {
           <p className="text-sm text-zinc-500">Add Feeder</p>
         </div>
 
-        <Button
-          className="w-full bg-blue-600 text-white hover:bg-blue-700"
-          asChild
+        <Link
+          href={"/create-feeder"}
+          className={cn(
+            buttonVariants(),
+            "w-full bg-blue-600 text-white hover:bg-blue-700"
+          )}
         >
-          <Link href={"/create-feeder"}>Add</Link>
-        </Button>
+          Add
+        </Link>
       </div>
     </div>
   );
