@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 import TanstackProvider from "@/providers/TanstackProvider";
-import { ThemeProvider } from "@/providers/ThemeProvider";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 
