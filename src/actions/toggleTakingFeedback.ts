@@ -2,6 +2,7 @@
 
 import { getFeederById } from "@/data/feeder";
 import { db } from "@/lib/db";
+import { revalidatePath } from "next/cache";
 
 export const toggleTakingFeedback = async (id: string, userId: string) => {
   const existingFeed = await getFeederById(id);
@@ -17,6 +18,8 @@ export const toggleTakingFeedback = async (id: string, userId: string) => {
         takingFeedback: !existingFeed?.takingFeedback,
       },
     });
+
+    revalidatePath(`/d/feeder`);
 
     return updatedFeeder?.takingFeedback;
   } catch (error) {

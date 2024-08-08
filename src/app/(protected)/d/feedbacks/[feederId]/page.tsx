@@ -1,12 +1,13 @@
 "use client";
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Toaster, toast } from "sonner";
 
 import { ActionToolTip } from "@/components/ActionTooltip";
 import { Card, CardContent } from "@/components/ui/card";
-import { MessageSquareOff, Trash2 } from "lucide-react";
+import { CheckCircle, MessageSquareOff, Trash2, XCircle } from "lucide-react";
 
+import { deleteFeedback } from "@/actions/deleteFeedback";
+import FeedbackSkeleton from "@/components/skeletons/FeedbackSkeleton";
 import {
   Dialog,
   DialogContent,
@@ -17,9 +18,6 @@ import {
 import { getFeedbacksByFeederId } from "@/data/feedback";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
-import { deleteFeedback } from "@/actions/deleteFeedback";
-import { Skeleton } from "@/components/ui/skeleton";
-import FeedbackSkeleton from "@/components/skeletons/FeedbackSkeleton";
 
 type Feedback = {
   id: string;
@@ -30,6 +28,8 @@ type Feedback = {
 export default function FeederFeedbacks() {
   const params = useParams();
   const router = useRouter();
+
+ 
 
   const { data, fetchStatus, refetch } = useQuery({
     queryKey: ["feedbacks"],
@@ -47,16 +47,17 @@ export default function FeederFeedbacks() {
     mutationFn: deleteFeedback,
     onSuccess: () => {
       toast.success("Feedback Deleted ⚡", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
+        closeButton: true,
+        icon: <CheckCircle className="h-4 w-4" />,
       });
+
       refetch();
+    },
+    onError: () => {
+      toast.error("Deletion Failed", {
+        closeButton: true,
+        icon: <XCircle className="h-4 w-4" />,
+      });
     },
   });
 
@@ -132,18 +133,7 @@ export default function FeederFeedbacks() {
           ))}
         </div>
       )}
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
+      <Toaster theme="system" richColors={true} position="bottom-right" />
     </div>
   );
 }
