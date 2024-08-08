@@ -15,7 +15,6 @@ export interface feederType {
 }
 
 async function AllFeeders() {
-
   const user = await currentUser();
   const feeders = await getFeedersByUserId(user?.id as string);
   return (
@@ -24,7 +23,7 @@ async function AllFeeders() {
         All Feeders
       </p>
       <ScrollArea className="whitespace-nowrap ">
-        <div className=" flex  w-full gap-3  p-2">
+        <div className=" flex  w-full gap-3 p-2">
           {feeders?.map((feeder) => (
             <FeederCardWrapper
               key={feeder.id}
