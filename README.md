@@ -1,7 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
 
+# Raay - An Anonymous Feedback taking platform 
+
+Built with NextJS 14 AppRouter, Tailwind, ShadCN UI, Aceternity UI, Prisma, TypeScript & Server Actions 
+
+
+## Features
+
+- 🏗️ Complete platform built from scratch in NextJS 14
+- 🔐 Authentication using AuthJS
+- ⌨️ 100% written in TypeScript 
+- 🖥️ User can create Feeder & take anonymous Feedbacks
+- 🔗 Custom Links for different Feeder
+- 🎁 and much more is coming......
+
+
+## Installation
+
+To get started with this project 
+
+```bash
+  git clone https://github.com/walkerbuddy01/RAAY.git
+```
+
+```bash
+  npm install 
+  #or
+  bun install 
+```
+
+and copy the .env.example variables into a separate .env file, fill them out & and that's all you need to get started!
+    
 First, run the development server:
 
 ```bash
@@ -20,14 +49,6 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
 ## Deploy on Vercel
 
