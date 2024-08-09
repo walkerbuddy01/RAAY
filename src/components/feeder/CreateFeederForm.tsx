@@ -47,7 +47,7 @@ export default function CreateFeederForm() {
         setError(data.error);
         if (data?.id) {
           setSuccess(data.success);
-          router.push(`/feeder/${data?.id}`);
+          router.push(`/d/feeder/${data?.id}`);
         }
       });
     });
