@@ -6,7 +6,7 @@ import { Cog, FolderOpen, MessageSquareMore } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-export function NavigationSideBar() {
+export default function NavigationSideBar() {
   const location = window.location.pathname.split("/");
   const exactLocation = location.filter((path) => path !== "");
 

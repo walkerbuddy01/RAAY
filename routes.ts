@@ -29,6 +29,7 @@ export const protectedRoutes: string[] = [
   "/d/feeder",
   "/d/setting",
   "/create-feeder",
+  "/d/feeder"
 ];
 
 /**
