@@ -1,6 +1,17 @@
 "use client";
 
 import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -8,15 +19,25 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
 
-import ActionAvatar from "../ActionAvatar";
-import { ShowHoverDetails } from "../ShowHoverDetails";
-import { ThemeToggler } from "../ThemeToggler";
-import { Button } from "../ui/button";
-import { signOut } from "next-auth/react";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
-import { AlignRight } from "lucide-react";
+import { NAV_ITEMS } from "@/lib/constants";
+import { AppWindow, MessageCircleMore } from "lucide-react";
+import { signOut } from "next-auth/react";
 import Link from "next/link";
+import MaxWidthWrapper from "../MaxWidthWrapper";
+import { Button } from "../ui/button";
+import ListItem from "../ui/listItem";
+import { Badge } from "../ui/badge";
 
 function DashboardNavbar() {
   const user = useCurrentUser();
@@ -24,88 +45,106 @@ function DashboardNavbar() {
     await signOut();
   };
 
-
-
   return (
-    <nav className="w-full h-[10%] sm:h-[12%] px-3 py-3 sm:px-5 sm:py-4 flex items-center justify-between ">
-      <div className="h-full flex justify-center items-center  bg-slate-500/40 dark:bg-slate-500/30 border border-gray-500/40 rounded-full ">
-        <ShowHoverDetails
-          title="@RAAY"
-          description="Anonymous feedback platform"
-          date="Built on 17 Jun 2024"
-        >
-          <p className="dark:text-white tracking-wide text-slate-200 font-semibold text-3xl px-2  ">
-            RAAY
-          </p>
-        </ShowHoverDetails>
-      </div>
-      <div className="h-full hidden sm:flex items-center gap-2 py-1 px-2 bg-slate-500/40 dark:bg-slate-500/30 border border-gray-500/40 rounded-full">
-        <ShowHoverDetails
-          title={`@${user?.name}`}
-          description={`${user?.email}`}
-        >
-          <p className="mr-3 text-lg">Welcome, {user?.name}</p>
-          <ActionAvatar
-            src={user?.image as string}
-            name={user?.name as string}
-          />
-        </ShowHoverDetails>
-      </div>
-
-      <div className="h-full hidden sm:flex items-center gap-3">
-        <Button variant={"destructive"} onClick={signOutCurrent}>
-          Sign Out
-        </Button>
-        <ThemeToggler />
-      </div>
-      <div className="h-full flex sm:hidden items-center gap-3">
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Button
-              variant={"default"}
-              size={"icon"}
-              className="bg-[#2B2D31] text-white p-1"
+    <nav className="bg-[#17191B] w-full rounded-xl">
+      <MaxWidthWrapper>
+        <div className="h-[60px] flex items-center justify-between ">
+          <p className="text-2xl font-bold flex items-center  gap-1">
+            <MessageCircleMore className="h-8 w-8" />
+            <p className="text-orange-500">Raay</p>
+            <Badge
+              variant={"outline"}
+              className="ml-2 font-medium text-green-400 border-green-600 bg-green-100/10"
             >
-              <AlignRight />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>
-              <div className="flex items-center gap-3">
-                {user?.name}
-                <ActionAvatar
-                  src={user?.image as string}
-                  name={user?.name as string}
-                  classname="h-8 w-8"
-                />
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Link href={"/d/feeder"}>Feeders</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              {" "}
-              <Link href={"/d/setting"}>Settings</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              {" "}
-              <Link href={"/d/feedbacks"}>Feedbacks</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Button
-                variant={"destructive"}
-                onClick={signOutCurrent}
-                className="w-full"
-              >
-                Sign Out
-              </Button>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+              Early Access
+            </Badge>
+          </p>
 
-        <ThemeToggler />
-      </div>
+          <div className="hidden sm:block">
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem key={"home"}>
+                  <Link href="/docs" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={navigationMenuTriggerStyle()}
+                    >
+                      Home
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+
+                {NAV_ITEMS.map((item) => (
+                  <NavigationMenuItem key={item.title}>
+                    <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                        {item.items.map((price) => (
+                          <ListItem
+                            key={price.label}
+                            title={price.label}
+                            href={price.href}
+                          >
+                            {price.description}
+                          </ListItem>
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                ))}
+
+                <NavigationMenuItem key={"setting"}>
+                  <Link href="/docs" passHref>
+                    <NavigationMenuLink
+                      className={navigationMenuTriggerStyle()}
+                    >
+                      Setting
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
+
+          <div className="sm:block hidden">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <AppWindow className="h-8 w-8 " />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+
+                <DropdownMenuItem>
+                  <Button variant={"destructive"} onClick={signOutCurrent}>
+                    Sign Out
+                  </Button>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+          <div className="block sm:hidden">
+            <Drawer>
+              <DrawerTrigger asChild>
+                <AppWindow className="h-8 w-8" />
+              </DrawerTrigger>
+              <DrawerContent className="h-[500px]">
+                <DrawerHeader>
+                  <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+                  <DrawerDescription>
+                    This action cannot be undone.
+                  </DrawerDescription>
+                </DrawerHeader>
+                <DrawerFooter>
+                  <Button>Submit</Button>
+                  <DrawerClose>
+                    <Button variant="outline">Cancel</Button>
+                  </DrawerClose>
+                </DrawerFooter>
+              </DrawerContent>
+            </Drawer>
+          </div>
+        </div>
+      </MaxWidthWrapper>
     </nav>
   );
 }
