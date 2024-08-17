@@ -49,7 +49,7 @@ function DashboardNavbar() {
     <nav className="bg-[#17191B] w-full rounded-xl">
       <MaxWidthWrapper>
         <div className="h-[60px] flex items-center justify-between ">
-          <p className="text-2xl font-bold flex items-center  gap-1">
+          <div className="text-2xl font-bold flex items-center  gap-1">
             <MessageCircleMore className="h-8 w-8" />
             <p className="text-orange-500">Raay</p>
             <Badge
@@ -58,13 +58,13 @@ function DashboardNavbar() {
             >
               Early Access
             </Badge>
-          </p>
+          </div>
 
           <div className="hidden sm:block">
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem key={"home"}>
-                  <Link href="/docs" legacyBehavior passHref>
+                  <Link href="/d/feeder" passHref>
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}
                     >
@@ -93,7 +93,7 @@ function DashboardNavbar() {
                 ))}
 
                 <NavigationMenuItem key={"setting"}>
-                  <Link href="/docs" passHref>
+                  <Link href="/d/setting" passHref>
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}
                     >
