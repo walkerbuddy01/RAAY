@@ -1,30 +1,31 @@
 "use client";
-
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 
+import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { AlignRight, Gem } from "lucide-react";
+import { signOut } from "next-auth/react";
 import ActionAvatar from "../ActionAvatar";
 import { ShowHoverDetails } from "../ShowHoverDetails";
 import { ThemeToggler } from "../ThemeToggler";
 import { Button } from "../ui/button";
-import { signOut } from "next-auth/react";
-import { useCurrentUser } from "@/hooks/useCurrentUser";
-import { AlignRight } from "lucide-react";
+import MaxWidthWrapper from "../MaxWidthWrapper";
 import Link from "next/link";
+import { NAV_PAGES, UPCOMING_FEATURES } from "@/lib/constants";
 
 function DashboardNavbar() {
   const user = useCurrentUser();
   const signOutCurrent = async () => {
     await signOut();
   };
-
-
 
   return (
     <nav className="w-full h-[10%] sm:h-[12%] px-3 py-3 sm:px-5 sm:py-4 flex items-center justify-between ">
@@ -58,9 +59,12 @@ function DashboardNavbar() {
         </Button>
         <ThemeToggler />
       </div>
-      <div className="h-full flex sm:hidden items-center gap-3">
-        <DropdownMenu>
-          <DropdownMenuTrigger>
+      <div
+        className="h-full flex sm:hidden items-center gap-3"
+        suppressHydrationWarning
+      >
+        <Drawer>
+          <DrawerTrigger>
             <Button
               variant={"default"}
               size={"icon"}
@@ -68,6 +72,69 @@ function DashboardNavbar() {
             >
               <AlignRight />
             </Button>
+          </DrawerTrigger>
+          <DrawerContent className="h-[420px]">
+            <MaxWidthWrapper className="px-6 flex flex-col gap-8">
+              <div className="space-y-3">
+                <p className="text-sm text-zinc-300">Manage</p>
+                <div className="space-y-1 ">
+                  {NAV_PAGES.map((item) => (
+                    <Link
+                      href={item.href}
+                      key={item.title}
+                      className="flex gap-3 items-center tracking-wide"
+                    >
+                      <item.icon className="h-4 w-4 text-zinc-500" />
+                      {item.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <div className="space-y-3">
+                <p className="text-sm text-zinc-300">Upcoming features</p>
+                <div className="space-y-1 ">
+                  {UPCOMING_FEATURES.map((item) => (
+                    <p
+                      key={item.title}
+                      className="flex gap-3 items-center text-zinc-400 tracking-wide"
+                    >
+                      <item.icon className="h-4 w-4 text-zinc-500" />
+                      {item.title}
+                    </p>
+                  ))}
+                </div>
+              </div>
+              <Button
+                className="w-full flex  items-center gap-2"
+                variant={"outline"}
+                disabled
+              >
+                Upgrade to Premium soon:{")"}
+                <Gem className="h-4 w-4" />
+              </Button>
+              <div className="flex items-center gap-3">
+                <ActionAvatar
+                  src={user?.image as string}
+                  name={user?.name as string}
+                />
+                <p className="mr-3"> {user?.name}</p>
+              </div>
+            </MaxWidthWrapper>
+          </DrawerContent>
+        </Drawer>
+
+        <ThemeToggler />
+      </div>
+    </nav>
+  );
+}
+
+export default DashboardNavbar;
+
+{
+  /* <DropdownMenu>
+          <DropdownMenuTrigger>
+            
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuLabel>
@@ -102,12 +169,5 @@ function DashboardNavbar() {
               </Button>
             </DropdownMenuItem>
           </DropdownMenuContent>
-        </DropdownMenu>
-
-        <ThemeToggler />
-      </div>
-    </nav>
-  );
+        </DropdownMenu> */
 }
-
-export default DashboardNavbar;
