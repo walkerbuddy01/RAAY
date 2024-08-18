@@ -1,29 +1,23 @@
 "use client";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 
 import { useCurrentUser } from "@/hooks/useCurrentUser";
-import { AlignRight, Gem } from "lucide-react";
+import { NAV_PAGES, UPCOMING_FEATURES } from "@/lib/constants";
+import { AlignRight, Gem, Loader2, LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
+import Link from "next/link";
 import ActionAvatar from "../ActionAvatar";
+import MaxWidthWrapper from "../MaxWidthWrapper";
 import { ShowHoverDetails } from "../ShowHoverDetails";
 import { ThemeToggler } from "../ThemeToggler";
 import { Button } from "../ui/button";
-import MaxWidthWrapper from "../MaxWidthWrapper";
-import Link from "next/link";
-import { NAV_PAGES, UPCOMING_FEATURES } from "@/lib/constants";
+import { useState } from "react";
 
 function DashboardNavbar() {
   const user = useCurrentUser();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const signOutCurrent = async () => {
+    setIsLoading(true);
     await signOut();
   };
 
@@ -55,7 +49,7 @@ function DashboardNavbar() {
 
       <div className="h-full hidden sm:flex items-center gap-3">
         <Button variant={"destructive"} onClick={signOutCurrent}>
-          Sign Out
+          {isLoading ? <Loader2 className="animate-spin" /> : <LogOut />}
         </Button>
         <ThemeToggler />
       </div>
@@ -65,11 +59,7 @@ function DashboardNavbar() {
       >
         <Drawer>
           <DrawerTrigger>
-            <Button
-              variant={"default"}
-              size={"icon"}
-              className="bg-[#2B2D31] text-white p-1"
-            >
+            <Button variant={"outline"} size={"icon"}>
               <AlignRight />
             </Button>
           </DrawerTrigger>
@@ -118,6 +108,15 @@ function DashboardNavbar() {
                   name={user?.name as string}
                 />
                 <p className="mr-3"> {user?.name}</p>
+                <div className="flex-1 flex justify-end">
+                  <Button variant={"destructive"} onClick={signOutCurrent}>
+                    {isLoading ? (
+                      <Loader2 className="animate-spin" />
+                    ) : (
+                      <LogOut />
+                    )}
+                  </Button>
+                </div>
               </div>
             </MaxWidthWrapper>
           </DrawerContent>
