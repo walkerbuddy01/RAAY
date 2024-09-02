@@ -1,25 +1,26 @@
 name: linting and formatting on PR
 on:
+  push:
+    branches:
+      - main
   pull_request:
-    branches: 
+    branches:
       - main
 
 jobs:
-   linting:
-      runs-on: ubuntu-latest
-      steps:
+  linting:
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '21' # Specify the Node.js version you want to use
+          node-version: "21" # Specify the Node.js version you want to use
 
       - name: Install dependencies
         run: npm install
-      
-      - name: Run ESlint
-        run: npm run lint  
 
-  
+      - name: Run ESlint
+        run: npm run lint
