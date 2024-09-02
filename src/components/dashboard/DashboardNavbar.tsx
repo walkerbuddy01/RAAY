@@ -41,6 +41,7 @@ import { Badge } from "../ui/badge";
 
 function DashboardNavbar() {
   const user = useCurrentUser();
+  console.log({ user }); 
   const signOutCurrent = async () => {
     await signOut();
   };
@@ -56,7 +57,9 @@ function DashboardNavbar() {
               variant={"outline"}
               className="ml-2 font-medium text-green-400 border-green-600 bg-green-100/10"
             >
-              Early Access
+              Early Access {" "}{
+                JSON.stringify(user)
+              }
             </Badge>
           </div>
 

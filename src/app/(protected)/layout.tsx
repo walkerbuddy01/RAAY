@@ -38,21 +38,8 @@ export default function DashboardLayout({
       userId: "1234355556",
       takingFeedback: false,
       inviteCode: "antibanti-babal-bol",
-    },{
-      id: "1",
-      label: "Hello test",
-      context: "this is mock testing data",
-      userId: "1234355556",
-      takingFeedback: false,
-      inviteCode: "antibanti-babal-bol",
-    },{
-      id: "1",
-      label: "Hello test",
-      context: "this is mock testing data",
-      userId: "1234355556",
-      takingFeedback: false,
-      inviteCode: "antibanti-babal-bol",
-    },{
+    },
+    {
       id: "1",
       label: "Hello test",
       context: "this is mock testing data",
@@ -67,42 +54,64 @@ export default function DashboardLayout({
       userId: "1234355556",
       takingFeedback: false,
       inviteCode: "antibanti-babal-bol",
-    },{
+    },
+    {
       id: "1",
       label: "Hello test",
       context: "this is mock testing data",
       userId: "1234355556",
       takingFeedback: false,
       inviteCode: "antibanti-babal-bol",
-    },{
+    },
+    {
       id: "1",
       label: "Hello test",
       context: "this is mock testing data",
       userId: "1234355556",
       takingFeedback: false,
       inviteCode: "antibanti-babal-bol",
-    },{
+    },
+    {
       id: "1",
       label: "Hello test",
       context: "this is mock testing data",
       userId: "1234355556",
       takingFeedback: false,
       inviteCode: "antibanti-babal-bol",
-    },{
+    },
+    {
       id: "1",
       label: "Hello test",
       context: "this is mock testing data",
       userId: "1234355556",
       takingFeedback: false,
       inviteCode: "antibanti-babal-bol",
-    },{
+    },
+    {
       id: "1",
       label: "Hello test",
       context: "this is mock testing data",
       userId: "1234355556",
       takingFeedback: false,
       inviteCode: "antibanti-babal-bol",
-    },{
+    },
+    {
+      id: "1",
+      label: "Hello test",
+      context: "this is mock testing data",
+      userId: "1234355556",
+      takingFeedback: false,
+      inviteCode: "antibanti-babal-bol",
+    },
+    {
+      id: "1",
+      label: "Hello test",
+      context: "this is mock testing data",
+      userId: "1234355556",
+      takingFeedback: false,
+      inviteCode: "antibanti-babal-bol",
+    },
+    {
       id: "1",
       label: "Hello test",
       context: "this is mock testing data",
@@ -116,8 +125,8 @@ export default function DashboardLayout({
       <DashboardNavbar />
 
       <MaxWidthWrapper className="max-w-screen-2xl h-full max-h-[1050px] py-2">
-        <div className="h-full w-full grid sm:grid-cols-2 md:grid-cols-3 gap-2  sm:gap-4 flex-1 flex-grow ">
-          <div className="h-full w-full flex flex-col gap-4 col-span-1 rounded-2xl overflow-hidden  ">
+        <div className="h-full w-full grid sm:grid-cols-2 md:grid-cols-7 gap-2  sm:gap-4 flex-1 flex-grow ">
+          <div className="h-full w-full flex flex-col gap-4 col-span-2 rounded-2xl overflow-hidden  ">
             <div>
               <Card className="bg-[#17191B]">
                 <CardHeader>
@@ -154,7 +163,10 @@ export default function DashboardLayout({
               </div>
               <div className=" h-96 p-2 space-y-3 overflow-auto bg-[#17191B] rounded-b-xl">
                 {mockFeeder.map((feed) => (
-                  <div className="h-12 bg-gray-400/20 border-y flex items-center px-2 gap-3 rounded-lg">
+                  <div
+                    className="h-12 bg-gray-400/20 border-y flex items-center px-2 gap-3 rounded-lg"
+                    key={feed.id}
+                  >
                     <Avatar className="bg-gray-700 flex items-center justify-center h-8 w-8 text-sm">
                       F
                     </Avatar>
@@ -164,10 +176,10 @@ export default function DashboardLayout({
               </div>
             </div>
           </div>
-          <div className="h-full w-full col-span-1 bg-blue-500 rounded-2xl overflow-hidden sm:block hidden">
+          <div className="h-full w-full col-span-3 bg-blue-500 rounded-2xl overflow-hidden sm:block hidden">
             {/* {children} */}
           </div>
-          <div className="h-full w-full col-span-1 bg-blue-500 rounded-2xl hidden md:block"></div>
+          <div className="h-full w-full col-span-2 bg-blue-500 rounded-2xl hidden md:block"></div>
         </div>
       </MaxWidthWrapper>
     </section>

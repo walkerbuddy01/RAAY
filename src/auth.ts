@@ -6,8 +6,6 @@ import { getUserById } from "./data/user";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
-  
-
     async signIn({ user, account }) {
       const existingUser = await getUserById(user.id as string);
 
@@ -29,17 +27,25 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return true;
     },
-
-    async session({ session, token }) {
-      if (session && token) {
-        session.user.id = token.sub as string;
+    async jwt({ token, user }) {
+      // This block runs only during initial sign-in
+      if (user) {
+        token.id = user.id;
+        token.name = user.name;
+        token.email = user.email;
+        token.image = user.image;
       }
-
-      return session;
+      return token;
     },
 
-    async jwt({ token }) {
-      return token;
+    async session({ session, token }){
+      console.log({ session, token });  
+      if (token.id) {
+        session.user.id = token.id as string;
+      }
+      // console.log({ session });
+
+      return session;
     },
   },
   adapter: PrismaAdapter(db),
